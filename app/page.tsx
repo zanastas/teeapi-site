@@ -24,7 +24,7 @@ export default function Home() {
           <a href="#how-it-works" className="text-sm font-medium hover:text-blue-600 transition-colors">How It Works</a>
           <a href="#main-features" className="text-sm font-medium hover:text-blue-600 transition-colors">Features</a>
           <a href="#use-cases" className="text-sm font-medium hover:text-blue-600 transition-colors">Use Cases</a>
-          <a href="#documentation" className="text-sm font-medium bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors">Try It Now</a>
+          <a href="#documentation" className="text-sm font-bold bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors">Try It Now</a>
         </nav>
         
         {/* Mobile menu button */}
@@ -72,7 +72,7 @@ export default function Home() {
             </a>
             <a 
               href="#documentation" 
-              className="text-sm font-medium bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors inline-block w-fit"
+              className="text-sm font-bold bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors inline-block w-fit"
               onClick={() => setMobileMenuOpen(false)}
             >
               Try It Now
@@ -82,7 +82,7 @@ export default function Home() {
       )}
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 flex flex-col items-center text-center relative">
+      <section className="container mx-auto px-4 py-12 flex flex-col items-center text-center relative">
         {/* Background Elements */}
         <div className="absolute -z-10 top-0 left-1/2 transform -translate-x-1/2 w-full h-full overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-blue-500/10 blur-3xl"></div>
@@ -111,7 +111,7 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <section id="features" className="container mx-auto px-4 py-12">
+      <section id="features" className="container mx-auto px-4 py-10">
         <h2 className="text-3xl font-bold text-center mb-10">Key Benefits</h2>
         <div className="grid md:grid-cols-3 gap-10">
           <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
@@ -156,7 +156,7 @@ export default function Home() {
       </div>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="container mx-auto px-4 py-12">
+      <section id="how-it-works" className="container mx-auto px-4 py-10">
         <h2 className="text-3xl font-bold text-center mb-10">How TeeAPI Works</h2>
         
         <div className="max-w-4xl mx-auto">
@@ -233,7 +233,7 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <section id="main-features" className="container mx-auto px-4 py-12">
+      <section id="main-features" className="container mx-auto px-4 py-10">
         <h2 className="text-3xl font-bold text-center mb-10">Main Features</h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
@@ -289,7 +289,7 @@ export default function Home() {
       </div>
 
       {/* Use Cases Section */}
-      <section id="use-cases" className="container mx-auto px-4 py-12">
+      <section id="use-cases" className="container mx-auto px-4 py-10">
         <h2 className="text-3xl font-bold text-center mb-10">Example Use Cases</h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
@@ -366,7 +366,7 @@ export default function Home() {
       </div>
 
       {/* Documentation Section */}
-      <section id="documentation" className="container mx-auto px-4 py-12">
+      <section id="documentation" className="container mx-auto px-4 py-10">
         <h2 className="text-3xl font-bold text-center mb-10">Developer Documentation</h2>
         
         <div className="max-w-4xl mx-auto mb-10">
@@ -403,7 +403,7 @@ export default function Home() {
 
 <span class="keyword">contract</span> <span class="class-name">FlightDelayInsurance</span> <span class="keyword">is</span> <span class="class-name">RestApiClient</span> {
     <span class="comment">// Amount to pay out for delayed flights</span>
-    <span class="keyword">uint256</span> <span class="keyword">constant</span> <span class="keyword">public</span> INSURANCE_PAYOUT = 0.1 ether;
+    <span class="keyword">uint256</span> <span class="keyword">constant</span> <span class="keyword">public</span> INSURANCE_PAYOUT = 0.001 ether;
     
     <span class="comment">// Flight information structure</span>
     <span class="keyword">struct</span> <span class="class-name">FlightInfo</span> {
@@ -452,7 +452,7 @@ export default function Home() {
     <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>[] <span class="keyword">memory</span> queryParams = <span class="keyword">new</span> <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>[](2);
     queryParams[0] = <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>({
         key: <span class="string">"access_key"</span>,
-        value: <span class="string">"BKYsjhVlGzVth8axoDpWJNxstMuU...9xIWyLy34n32SvbD9mAl"</span>,
+        value: <span class="string">"BKYsjhVlGzVth8axoDpWJNxstMuU+W8rgLdye1MsAiWIfLbUg5xVfST34kp/b7DvI1SLmECJKuBplDxdDxF1NrlT/f6w/XX7Unp0i3E2Aygi85W8nZbGjSk07BVJO4xlxuopzJDbbZceJrLhih3royD/9xIWyLy34n32SvbD9mAl"</span>,
         encrypted: <span class="keyword">true</span>
     });
     queryParams[1] = <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>({
@@ -532,6 +532,73 @@ export default function Home() {
     claimers[requestId] = msg.sender;
     flightIds[requestId] = <span class="class-name">FlightId</span>({flightNumber: flightNumber, date: <span class="string">""</span>});
     <span class="keyword">return</span> requestId;
+}
+
+<span class="comment">/**
+ * @dev Fund the contract to pay for insurance claims
+ */</span>
+<span class="function">function</span> <span class="function">fundContract</span>() <span class="keyword">external</span> <span class="keyword">payable</span> <span class="keyword">onlyOwner</span> {
+    <span class="comment">// Simply accepts ETH sent to the contract</span>
+}
+
+<span class="comment">/**
+ * @dev Withdraw funds from the contract (owner only)
+ */</span>
+<span class="function">function</span> <span class="function">withdrawFunds</span>() <span class="keyword">external</span> <span class="keyword">onlyOwner</span> {
+    <span class="class-name">SafeTransferLib</span>.safeTransferAllETH(owner());
+}
+
+<span class="comment">/**
+ * @dev Get flight information
+ * @param flightNumber IATA flight number
+ * @param date Flight date in YYYY-MM-DD format
+ * @return Information about the flight
+ */</span>
+<span class="function">function</span> <span class="function">getFlightInfo</span>(<span class="keyword">string</span> <span class="keyword">memory</span> flightNumber, <span class="keyword">string</span> <span class="keyword">memory</span> date) <span class="keyword">external</span> <span class="keyword">view</span> <span class="keyword">returns</span> (<span class="class-name">FlightInfo</span> <span class="keyword">memory</span>) {
+    <span class="keyword">return</span> flightData[flightNumber][date];
+}
+
+<span class="comment">/**
+ * @dev Get flight information by requestId
+ * @param requestId Unique identifier for the request
+ * @return Information about the flight
+ */</span>
+<span class="function">function</span> <span class="function">getFlightInfoById</span>(<span class="keyword">bytes32</span> requestId) <span class="keyword">external</span> <span class="keyword">view</span> <span class="keyword">returns</span> (<span class="class-name">FlightInfo</span> <span class="keyword">memory</span>) {
+    <span class="class-name">FlightId</span> <span class="keyword">memory</span> flightId = flightIds[requestId];
+    <span class="keyword">return</span> flightData[flightId.flightNumber][flightId.date];
+}
+
+<span class="comment">/**
+ * @dev Implementation of _handleResponse from RestApiClient
+ * @param requestId Unique identifier for the request
+ * @param success Whether the API request was successful
+ * @param data ABI-encoded response data according to the requested fields
+ */</span>
+<span class="function">function</span> <span class="function">_handleResponse</span>(<span class="keyword">bytes32</span> requestId, <span class="keyword">bool</span> success, <span class="keyword">bytes</span> <span class="keyword">calldata</span> data) <span class="keyword">internal</span> <span class="keyword">override</span> {
+    <span class="keyword">address</span> claimer = claimers[requestId];
+
+    (<span class="keyword">bool</span> isLanded, <span class="keyword">bool</span> isDelayed, <span class="keyword">uint256</span> delayMinutes, <span class="keyword">string</span> <span class="keyword">memory</span> flightNumber, <span class="keyword">string</span> <span class="keyword">memory</span> date) =
+        abi.decode(data, (<span class="keyword">bool</span>, <span class="keyword">bool</span>, <span class="keyword">uint256</span>, <span class="keyword">string</span>, <span class="keyword">string</span>));
+
+    <span class="comment">// Update flight data</span>
+    <span class="class-name">FlightInfo</span> <span class="keyword">memory</span> flight = flightData[flightNumber][date];
+    <span class="comment">// Return early if flight already exists</span>
+    <span class="keyword">if</span> (flight.claimTimestamp != 0) {
+        <span class="keyword">return</span>;
+    }
+    flight.delayed = isLanded && isDelayed;
+    flight.delayMinutes = delayMinutes;
+
+    <span class="keyword">emit</span> <span class="function">FlightDelayVerified</span>(flightNumber, date, flight.delayed, delayMinutes);
+    <span class="keyword">if</span> (flight.delayed) {
+        flight.claimed = <span class="keyword">true</span>;
+        flight.claimTimestamp = block.timestamp;
+        <span class="comment">// Transfer payout to claimant</span>
+        <span class="class-name">SafeTransferLib</span>.safeTransferETH(claimer, INSURANCE_PAYOUT);
+        <span class="keyword">emit</span> <span class="function">ClaimPaid</span>(claimer, flightNumber, date, INSURANCE_PAYOUT);
+    }
+    flightData[flightNumber][date] = flight;
+    flightIds[requestId].date = date;
 }</pre>` }}/>
               </div>
             </div>
@@ -662,7 +729,7 @@ export default function Home() {
             Interact with TeeAPI smart contracts on any EVM chain and see the power of secure API integration firsthand.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="https://abi.ninja/" target="_blank" rel="noopener noreferrer" className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
+            <a href="https://abi.ninja/0x9c91C6829FDF695cAc032022cB7340F67EFe211C/84532?methods=initiateClaim" target="_blank" rel="noopener noreferrer" className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
               Try It Now
             </a>
             <p className="text-sm text-gray-500 dark:text-gray-400 self-center">
