@@ -452,7 +452,7 @@ export default function Home() {
     <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>[] <span class="keyword">memory</span> queryParams = <span class="keyword">new</span> <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>[](2);
     queryParams[0] = <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>({
         key: <span class="string">"access_key"</span>,
-        value: <span class="string">"BKYsjhVlGzVth8axoDpWJNxstMuU+W8rgLdye1MsAiWIfLbUg5xVfST34kp/b7DvI1SLmECJKuBplDxdDxF1NrlT/f6w/XX7Unp0i3E2Aygi85W8nZbGjSk07BVJO4xlxuopzJDbbZceJrLhih3royD/9xIWyLy34n32SvbD9mAl"</span>,
+        value: <span class="string">"BKYs...vbD9mAl"</span>,
         encrypted: <span class="keyword">true</span>
     });
     queryParams[1] = <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>({
