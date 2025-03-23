@@ -729,7 +729,7 @@ export default function Home() {
             Interact with TeeAPI smart contracts on any EVM chain and see the power of secure API integration firsthand.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="https://abi.ninja/0x9c91C6829FDF695cAc032022cB7340F67EFe211C/84532?methods=initiateClaim" target="_blank" rel="noopener noreferrer" className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
+            <a href="https://abi.ninja/0x08B761d3D9300e56CaC0c85A438C9f6aC2e7DCd3/84532?methods=initiateClaim" target="_blank" rel="noopener noreferrer" className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
               Try It Now
             </a>
             <p className="text-sm text-gray-500 dark:text-gray-400 self-center">
