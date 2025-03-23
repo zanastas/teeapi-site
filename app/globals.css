@@ -37,3 +37,56 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Solidity syntax highlighting */
+pre {
+  color: #d0d0d0;
+}
+
+pre .comment {
+  color: #7d8b98;
+}
+
+pre .keyword {
+  color: #c792ea;
+}
+
+pre .string {
+  color: #c3e88d;
+}
+
+pre .number {
+  color: #f78c6c;
+}
+
+pre .function {
+  color: #82aaff;
+}
+
+pre .operator {
+  color: #89ddff;
+}
+
+pre .class-name {
+  color: #ffcb6b;
+}
+
+pre .property {
+  color: #b2ccd6;
+}
+
+pre .builtin {
+  color: #f07178;
+}
+
+pre .punctuation {
+  color: #89ddff;
+}
+
+pre .variable {
+  color: #eeffff;
+}
+
+pre .decorator {
+  color: #c792ea;
+}
