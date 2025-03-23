@@ -5,7 +5,6 @@ import { useState } from "react";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('flight');
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-black">
@@ -233,7 +232,7 @@ export default function Home() {
         <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
       </div>
 
-      {/* Main Features Section */}
+      {/* Features Section */}
       <section id="main-features" className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold text-center mb-10">Main Features</h2>
         <div className="grid md:grid-cols-2 gap-8">
@@ -379,24 +378,16 @@ export default function Home() {
           {/* Tabs */}
           <div className="mb-8">
             <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
-              <button 
-                className={`px-6 py-2 ${activeTab === 'flight' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-500 dark:text-gray-400'} font-medium`}
-                onClick={() => setActiveTab('flight')}
-              >
-                Flight Delay Insurance
-              </button>
-              <button 
-                className={`px-6 py-2 ${activeTab === 'bank' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-500 dark:text-gray-400'} font-medium`}
-                onClick={() => setActiveTab('bank')}
-              >
-                Bank Balance Verification
-              </button>
+              <button className="px-6 py-2 border-b-2 border-blue-600 text-blue-600 font-medium">Flight Delay Insurance</button>
+              {/* Hide Bank Balance Verification button for now 
+              <button className="px-6 py-2 text-gray-500 dark:text-gray-400 font-medium">Bank Balance Verification</button>
+              */}
             </div>
           </div>
 
           {/* Flight Delay Example */}
-          <div className={activeTab === 'flight' ? 'block' : 'hidden'}>
-            <h4 className="text-xl font-semibold mb-4">Example 1: Flight Delay Insurance</h4>
+          <div className="block">
+            <h4 className="text-xl font-semibold mb-4">Example: Flight Delay Insurance</h4>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               Create a smart contract that automatically pays out insurance claims when a flight is delayed.
             </p>
@@ -404,90 +395,195 @@ export default function Home() {
             <div className="mb-6">
               <h5 className="font-semibold mb-2">Step 1: Initialize TeeAPI in your contract</h5>
               <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
-                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="comment">// SPDX-License-Identifier: MIT</span>
+                <div dangerouslySetInnerHTML={{ __html: `<pre class="text-sm font-mono"><span class="comment">// SPDX-License-Identifier: MIT</span>
 <span class="keyword">pragma solidity</span> ^0.8.0;
 
-<span class="keyword">import</span> <span class="string">"@teeapi/contracts/TeeApiConsumer.sol"</span>;
+<span class="keyword">import</span> <span class="string">"@teeapi/contracts/RestApiClient.sol"</span>;
+<span class="keyword">import</span> <span class="string">"@solady/src/utils/SafeTransferLib.sol"</span>;
 
-<span class="keyword">contract</span> <span class="class-name">FlightDelayInsurance</span> <span class="keyword">is</span> <span class="class-name">TeeApiConsumer</span> {
-    <span class="comment">// Policy details struct</span>
-    <span class="keyword">struct</span> <span class="class-name">Policy</span> {
-        <span class="keyword">address</span> policyholder;
-        <span class="keyword">string</span> flightNumber;
-        <span class="keyword">uint256</span> departureDate;
-        <span class="keyword">uint256</span> premium;
-        <span class="keyword">uint256</span> payoutAmount;
+<span class="keyword">contract</span> <span class="class-name">FlightDelayInsurance</span> <span class="keyword">is</span> <span class="class-name">RestApiClient</span> {
+    <span class="comment">// Amount to pay out for delayed flights</span>
+    <span class="keyword">uint256</span> <span class="keyword">constant</span> <span class="keyword">public</span> INSURANCE_PAYOUT = 0.1 ether;
+    
+    <span class="comment">// Flight information structure</span>
+    <span class="keyword">struct</span> <span class="class-name">FlightInfo</span> {
+        <span class="keyword">bool</span> delayed;
+        <span class="keyword">uint256</span> delayMinutes;
         <span class="keyword">bool</span> claimed;
+        <span class="keyword">uint256</span> claimTimestamp;
     }
     
-    <span class="keyword">mapping</span>(<span class="keyword">uint256</span> => <span class="class-name">Policy</span>) <span class="keyword">public</span> policies;
-    <span class="keyword">uint256</span> <span class="keyword">public</span> nextPolicyId;
-    
-    <span class="function">constructor</span>(<span class="keyword">address</span> _teeApiAddress) <span class="class-name">TeeApiConsumer</span>(_teeApiAddress) {
-        <span class="comment">// Initialize contract with TeeAPI Oracle address</span>
+    <span class="comment">// Flight identifier structure</span>
+    <span class="keyword">struct</span> <span class="class-name">FlightId</span> {
+        <span class="keyword">string</span> flightNumber;
+        <span class="keyword">string</span> date;
     }
-}` }} />
+    
+    <span class="comment">// Mappings to store flight data and claims</span>
+    <span class="keyword">mapping</span>(<span class="keyword">string</span> => <span class="keyword">mapping</span>(<span class="keyword">string</span> => <span class="class-name">FlightInfo</span>)) <span class="keyword">public</span> flightData;
+    <span class="keyword">mapping</span>(<span class="keyword">bytes32</span> => <span class="keyword">address</span>) <span class="keyword">public</span> claimers;
+    <span class="keyword">mapping</span>(<span class="keyword">bytes32</span> => <span class="class-name">FlightId</span>) <span class="keyword">public</span> flightIds;
+    
+    <span class="comment">// Events</span>
+    <span class="keyword">event</span> <span class="function">FlightDelayVerified</span>(<span class="keyword">string</span> flightNumber, <span class="keyword">string</span> date, <span class="keyword">bool</span> delayed, <span class="keyword">uint256</span> delayMinutes);
+    <span class="keyword">event</span> <span class="function">ClaimPaid</span>(<span class="keyword">address</span> claimer, <span class="keyword">string</span> flightNumber, <span class="keyword">string</span> date, <span class="keyword">uint256</span> amount);
+    
+    <span class="comment">/**
+     * @dev Constructor
+     * @param _oracle Address of the Oracle contract
+     */</span>
+    <span class="function">constructor</span>(<span class="keyword">address</span> _oracle) <span class="class-name">RestApiClient</span>(_oracle) {
+        _initializeOwner(msg.sender);
+    }
+}</pre>` }}/>
               </div>
             </div>
 
             <div className="mb-6">
-              <h5 className="font-semibold mb-2">Step 2: Create the insurance policy purchase function</h5>
+              <h5 className="font-semibold mb-2">Step 2: Create the claim initiation function</h5>
               <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
-                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="function">function</span> <span class="function">purchasePolicy</span>(<span class="keyword">string</span> <span class="keyword">memory</span> _flightNumber, <span class="keyword">uint256</span> _departureDate) 
-    <span class="keyword">external</span> <span class="keyword">payable</span> {
-    <span class="function">require</span>(msg.value > 0, <span class="string">"Premium must be greater than 0"</span>);
-    
-    <span class="keyword">uint256</span> policyId = nextPolicyId++;
-    <span class="keyword">uint256</span> payoutAmount = msg.value * 3; <span class="comment">// 3x payout for simplicity</span>
-    
-    policies[policyId] = <span class="class-name">Policy</span>({
-        policyholder: msg.sender,
-        flightNumber: _flightNumber,
-        departureDate: _departureDate,
-        premium: msg.value,
-        payoutAmount: payoutAmount,
-        claimed: <span class="keyword">false</span>
+                <div dangerouslySetInnerHTML={{ __html: `<pre class="text-sm font-mono"><span class="comment">/**
+ * @dev Check if a flight is delayed
+ * @param flightNumber IATA flight number (e.g., UA1606)
+ * @return requestId The unique identifier for the request
+ */</span>
+<span class="function">function</span> <span class="function">initiateClaim</span>(<span class="keyword">string</span> <span class="keyword">memory</span> flightNumber) <span class="keyword">external</span> <span class="keyword">payable</span> <span class="keyword">returns</span> (<span class="keyword">bytes32</span>) {
+    <span class="comment">// Create query parameters with encrypted API key</span>
+    <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>[] <span class="keyword">memory</span> queryParams = <span class="keyword">new</span> <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>[](2);
+    queryParams[0] = <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>({
+        key: <span class="string">"access_key"</span>,
+        value: <span class="string">"BKYsjhVlGzVth8axoDpWJNxstMuU...9xIWyLy34n32SvbD9mAl"</span>,
+        encrypted: <span class="keyword">true</span>
     });
-    
-    <span class="keyword">emit</span> <span class="function">PolicyPurchased</span>(policyId, msg.sender, _flightNumber);
-}` }} />
+    queryParams[1] = <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>({
+        key: <span class="string">"flight_iata"</span>, 
+        value: flightNumber, 
+        encrypted: <span class="keyword">false</span>
+    });
+
+    <span class="comment">// Define conditions for verification</span>
+    <span class="class-name">IOracle</span>.<span class="class-name">Condition</span> <span class="keyword">memory</span> flightLanded = <span class="class-name">IOracle</span>.<span class="class-name">Condition</span>({
+        operator: <span class="string">"eq"</span>, 
+        value: <span class="string">"landed"</span>, 
+        encrypted: <span class="keyword">false</span>
+    });
+    <span class="class-name">IOracle</span>.<span class="class-name">Condition</span> <span class="keyword">memory</span> isDelayed = <span class="class-name">IOracle</span>.<span class="class-name">Condition</span>({
+        operator: <span class="string">"gt"</span>, 
+        value: <span class="string">"0"</span>, 
+        encrypted: <span class="keyword">false</span>
+    });
+    <span class="class-name">IOracle</span>.<span class="class-name">Condition</span> <span class="keyword">memory</span> noCondition = <span class="class-name">IOracle</span>.<span class="class-name">Condition</span>({
+        operator: <span class="string">""</span>, 
+        value: <span class="string">""</span>, 
+        encrypted: <span class="keyword">false</span>
+    });
+
+    <span class="comment">// Create response fields with conditions to verify</span>
+    <span class="class-name">IOracle</span>.<span class="class-name">ResponseField</span>[] <span class="keyword">memory</span> responseFields = <span class="keyword">new</span> <span class="class-name">IOracle</span>.<span class="class-name">ResponseField</span>[](5);
+
+    <span class="comment">// Verify if flight has landed</span>
+    responseFields[0] = <span class="class-name">IOracle</span>.<span class="class-name">ResponseField</span>({
+        path: <span class="string">"$.data[0].flight_status"</span>, 
+        responseType: <span class="string">"string"</span>, 
+        condition: flightLanded
+    });
+
+    <span class="comment">// Verify if arrival delay is greater than 0</span>
+    responseFields[1] = <span class="class-name">IOracle</span>.<span class="class-name">ResponseField</span>({
+        path: <span class="string">"$.data[0].arrival.delay"</span>, 
+        responseType: <span class="string">"uint256"</span>, 
+        condition: isDelayed
+    });
+
+    <span class="comment">// Extract the actual delay minutes</span>
+    responseFields[2] = <span class="class-name">IOracle</span>.<span class="class-name">ResponseField</span>({
+        path: <span class="string">"$.data[0].arrival.delay"</span>, 
+        responseType: <span class="string">"uint256"</span>, 
+        condition: noCondition
+    });
+
+    <span class="comment">// Extract the flight number</span>
+    responseFields[3] = <span class="class-name">IOracle</span>.<span class="class-name">ResponseField</span>({
+        path: <span class="string">"$.data[0].flight.iata"</span>, 
+        responseType: <span class="string">"string"</span>, 
+        condition: noCondition
+    });
+
+    <span class="comment">// Extract the flight date</span>
+    responseFields[4] = <span class="class-name">IOracle</span>.<span class="class-name">ResponseField</span>({
+        path: <span class="string">"$.data[0].flight_date"</span>, 
+        responseType: <span class="string">"string"</span>, 
+        condition: noCondition
+    });
+
+    <span class="comment">// Make the request</span>
+    <span class="keyword">bytes32</span> requestId = makeRequest({
+        method: <span class="class-name">IOracle</span>.<span class="class-name">HttpMethod</span>.GET,
+        url: <span class="string">"https://api.aviationstack.com/v1/flights"</span>,
+        urlEncrypted: <span class="keyword">false</span>,
+        headers: <span class="keyword">new</span> <span class="class-name">IOracle</span>.<span class="class-name">KeyValue</span>[](0),
+        queryParams: queryParams,
+        body: <span class="string">""</span>,
+        bodyEncrypted: <span class="keyword">false</span>,
+        responseFields: responseFields
+    });
+
+    <span class="comment">// Store claim information</span>
+    claimers[requestId] = msg.sender;
+    flightIds[requestId] = <span class="class-name">FlightId</span>({flightNumber: flightNumber, date: <span class="string">""</span>});
+    <span class="keyword">return</span> requestId;
+}</pre>` }}/>
               </div>
             </div>
 
             <div className="mb-6">
-              <h5 className="font-semibold mb-2">Step 3: Create claim function using TeeAPI</h5>
+              <h5 className="font-semibold mb-2">Step 3: Implement the response handler</h5>
               <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
-                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="function">function</span> <span class="function">checkFlightDelay</span>(<span class="keyword">uint256</span> _policyId) <span class="keyword">external</span> {
-    <span class="class-name">Policy</span> <span class="keyword">storage</span> policy = policies[_policyId];
-    <span class="function">require</span>(policy.policyholder != <span class="keyword">address</span>(0), <span class="string">"Policy does not exist"</span>);
-    <span class="function">require</span>(!policy.claimed, <span class="string">"Policy already claimed"</span>);
-    
-    <span class="comment">// Define API request</span>
-    <span class="keyword">bytes</span> <span class="keyword">memory</span> encodedRequest = <span class="function">abi.encode</span>(
-        <span class="string">"https://api.flightdata.com/status"</span>, <span class="comment">// API endpoint</span>
-        <span class="keyword">string</span>(<span class="function">abi.encodePacked</span>(<span class="string">"flight="</span>, policy.flightNumber, <span class="string">"&date="</span>, <span class="function">uint2str</span>(policy.departureDate))),
-        <span class="string">""</span>, <span class="comment">// No headers needed for this example</span>
-        <span class="string">"$.flight.delay"</span> <span class="comment">// JSON path to extract the delay time in minutes</span>
-    );
-    
-    <span class="comment">// Request API data through TeeAPI</span>
-    <span class="function">requestTeeApi</span>(encodedRequest, <span class="keyword">this</span>.processFlightDelay.<span class="property">selector</span>, <span class="function">abi.encode</span>(_policyId));
-}` }} />
+                <div dangerouslySetInnerHTML={{ __html: `<pre class="text-sm font-mono"><span class="comment">/**
+ * @dev Implementation of _handleResponse from RestApiClient
+ * @param requestId Unique identifier for the request
+ * @param success Whether the API request was successful
+ * @param data ABI-encoded response data according to the requested fields
+ */</span>
+<span class="function">function</span> <span class="function">_handleResponse</span>(<span class="keyword">bytes32</span> requestId, <span class="keyword">bool</span> success, <span class="keyword">bytes</span> <span class="keyword">calldata</span> data) <span class="keyword">internal</span> <span class="keyword">override</span> {
+    <span class="keyword">address</span> claimer = claimers[requestId];
+
+    (<span class="keyword">bool</span> isLanded, <span class="keyword">bool</span> isDelayed, <span class="keyword">uint256</span> delayMinutes, <span class="keyword">string</span> <span class="keyword">memory</span> flightNumber, <span class="keyword">string</span> <span class="keyword">memory</span> date) =
+        abi.decode(data, (<span class="keyword">bool</span>, <span class="keyword">bool</span>, <span class="keyword">uint256</span>, <span class="keyword">string</span>, <span class="keyword">string</span>));
+
+    <span class="comment">// Update flight data</span>
+    <span class="class-name">FlightInfo</span> <span class="keyword">memory</span> flight = flightData[flightNumber][date];
+    <span class="comment">// Return early if flight already exists</span>
+    <span class="keyword">if</span> (flight.claimTimestamp != 0) {
+        <span class="keyword">return</span>;
+    }
+    flight.delayed = isLanded && isDelayed;
+    flight.delayMinutes = delayMinutes;
+
+    <span class="keyword">emit</span> <span class="function">FlightDelayVerified</span>(flightNumber, date, flight.delayed, delayMinutes);
+    <span class="keyword">if</span> (flight.delayed) {
+        flight.claimed = <span class="keyword">true</span>;
+        flight.claimTimestamp = block.timestamp;
+        <span class="comment">// Transfer payout to claimant</span>
+        <span class="class-name">SafeTransferLib</span>.safeTransferETH(claimer, INSURANCE_PAYOUT);
+        <span class="keyword">emit</span> <span class="function">ClaimPaid</span>(claimer, flightNumber, date, INSURANCE_PAYOUT);
+    }
+    flightData[flightNumber][date] = flight;
+    flightIds[requestId].date = date;
+}</pre>` }}/>
               </div>
             </div>
           </div>
 
-          {/* Bank Balance Example */}
-          <div className={activeTab === 'bank' ? 'block' : 'hidden'}>
+          {/* Commenting out Bank Balance Verification section
+          <div className="hidden">
             <h4 className="text-xl font-semibold mb-4">Example 2: Bank Balance Verification</h4>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Verify bank account balances for DeFi loans without exposing sensitive data.
-            </p>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">Verify bank account balances for DeFi loans without exposing sensitive data.</p>
 
             <div className="mb-6">
               <h5 className="font-semibold mb-2">Step 1: Initialize TeeAPI in your contract</h5>
               <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
-                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="comment">// SPDX-License-Identifier: MIT</span>
+                <div dangerouslySetInnerHTML={{ __html: `<pre class="text-sm font-mono"><span class="comment">// SPDX-License-Identifier: MIT</span>
 <span class="keyword">pragma solidity</span> ^0.8.0;
 
 <span class="keyword">import</span> <span class="string">"@teeapi/contracts/TeeApiConsumer.sol"</span>;
@@ -508,7 +604,7 @@ export default function Home() {
     <span class="function">constructor</span>(<span class="keyword">address</span> _teeApiAddress) <span class="class-name">TeeApiConsumer</span>(_teeApiAddress) {
         <span class="comment">// Initialize contract with TeeAPI Oracle address</span>
     }
-}` }} />
+}</pre>` }}/>
               </div>
             </div>
 
@@ -557,6 +653,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          */}
         </div>
 
         <div className="bg-blue-50 dark:bg-gray-800 p-6 rounded-lg border border-blue-100 dark:border-gray-700 mt-12">
@@ -566,9 +663,6 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="https://abi.ninja/" target="_blank" rel="noopener noreferrer" className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
               Try It Now
             </a>
             <p className="text-sm text-gray-500 dark:text-gray-400 self-center">
