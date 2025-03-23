@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('flight');
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-black">
@@ -13,20 +14,19 @@ export default function Home() {
         <div className="flex items-center">
           <Image 
             src="/teeapi-logo.svg" 
-            alt="TeeAPI Logo" 
+            alt="TeeAPI - Secure Blockchain API Bridge" 
             width={120} 
             height={30} 
             priority
           />
         </div>
-        <nav className="hidden md:flex space-x-6">
-          <a href="#features" className="text-sm font-medium hover:text-blue-600 transition-colors">Features</a>
-          <a href="#use-cases" className="text-sm font-medium hover:text-blue-600 transition-colors">Use Cases</a>
-          <a href="#why" className="text-sm font-medium hover:text-blue-600 transition-colors">Why TEE</a>
+        <nav className="hidden md:flex space-x-6 items-center">
+          <a href="#features" className="text-sm font-medium hover:text-blue-600 transition-colors">Why TEE</a>
           <a href="#how-it-works" className="text-sm font-medium hover:text-blue-600 transition-colors">How It Works</a>
-          <a href="#contact" className="text-sm font-medium hover:text-blue-600 transition-colors">Try It Now</a>
+          <a href="#main-features" className="text-sm font-medium hover:text-blue-600 transition-colors">Features</a>
+          <a href="#use-cases" className="text-sm font-medium hover:text-blue-600 transition-colors">Use Cases</a>
+          <a href="#documentation" className="text-sm font-medium bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors">Try It Now</a>
         </nav>
-        <a href="#contact" className="hidden md:block px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors">Try It Now</a>
         
         {/* Mobile menu button */}
         <button 
@@ -48,20 +48,6 @@ export default function Home() {
               className="text-sm font-medium hover:text-blue-600 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Features
-            </a>
-            <a 
-              href="#use-cases" 
-              className="text-sm font-medium hover:text-blue-600 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Use Cases
-            </a>
-            <a 
-              href="#why" 
-              className="text-sm font-medium hover:text-blue-600 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
               Why TEE
             </a>
             <a 
@@ -72,15 +58,22 @@ export default function Home() {
               How It Works
             </a>
             <a 
-              href="#contact" 
+              href="#main-features" 
               className="text-sm font-medium hover:text-blue-600 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Try It Now
+              Features
             </a>
             <a 
-              href="#contact" 
-              className="mt-2 px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors text-center"
+              href="#use-cases" 
+              className="text-sm font-medium hover:text-blue-600 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Use Cases
+            </a>
+            <a 
+              href="#documentation" 
+              className="text-sm font-medium bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors inline-block w-fit"
               onClick={() => setMobileMenuOpen(false)}
             >
               Try It Now
@@ -114,13 +107,13 @@ export default function Home() {
       </section>
 
       {/* Visual Connection */}
-      <div className="flex justify-center py-10">
-        <div className="w-1 h-16 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
+      <div className="flex justify-center py-6">
+        <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
       </div>
 
       {/* Features Section */}
-      <section id="features" className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-center mb-16">Key Benefits</h2>
+      <section id="features" className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center mb-10">Key Benefits</h2>
         <div className="grid md:grid-cols-3 gap-10">
           <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
             <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
@@ -159,21 +152,21 @@ export default function Home() {
       </section>
 
       {/* Visual Connection */}
-      <div className="flex justify-center py-10">
-        <div className="w-1 h-16 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
+      <div className="flex justify-center py-6">
+        <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
       </div>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-center mb-16">How TeeAPI Works</h2>
+      <section id="how-it-works" className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center mb-10">How TeeAPI Works</h2>
         
         <div className="max-w-4xl mx-auto">
-          <div className="relative py-10">
+          <div className="relative py-6">
             {/* Workflow diagram */}
             <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-cyan-500 transform -translate-x-1/2"></div>
             
             {/* Step 1 */}
-            <div className="relative flex items-center mb-16">
+            <div className="relative flex items-center mb-10">
               <div className="flex-1 pr-8 md:pr-16 text-right">
                 <h3 className="text-xl font-semibold mb-2">1. Request</h3>
                 <p className="text-gray-600 dark:text-gray-300">
@@ -193,7 +186,7 @@ export default function Home() {
             </div>
             
             {/* Step 2 */}
-            <div className="relative flex items-center mb-16">
+            <div className="relative flex items-center mb-10">
               <div className="flex-1 pr-8 md:pr-16 text-right">
                 <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
                   <code className="text-sm text-blue-600 dark:text-blue-400 font-mono">TEE Service</code>
@@ -236,13 +229,69 @@ export default function Home() {
       </section>
 
       {/* Visual Connection */}
-      <div className="flex justify-center py-10">
-        <div className="w-1 h-16 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
+      <div className="flex justify-center py-6">
+        <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
+      </div>
+
+      {/* Main Features Section */}
+      <section id="main-features" className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center mb-10">Main Features</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">REST API Integration</h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Secure bridge enabling smart contracts to request and receive data from any external web service while maintaining blockchain security principles.
+            </p>
+          </div>
+          <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Selective Data Extraction</h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Extract only the specific fields needed from API responses, keeping all other data private and off-chain to ensure maximum privacy.
+            </p>
+          </div>
+          <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Input Encryption</h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              End-to-end encryption for sensitive request components including URLs, query parameters, and API tokens, preventing exposure on the blockchain.
+            </p>
+          </div>
+          <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Confidential Verification</h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Perform private condition checks against API data within the TEE, returning only boolean results while keeping actual values hidden from the blockchain.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Visual Connection */}
+      <div className="flex justify-center py-6">
+        <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
       </div>
 
       {/* Use Cases Section */}
-      <section id="use-cases" className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-center mb-16">Example Use Cases</h2>
+      <section id="use-cases" className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center mb-10">Example Use Cases</h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
             <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
@@ -312,53 +361,238 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section id="contact" className="container mx-auto px-4 py-20 text-center">
-        <h2 className="text-3xl font-bold mb-6">Ready to Try TeeAPI?</h2>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
-          Interact with TeeAPI smart contracts on any EVM chain and see the power of secure API integration firsthand.
-        </p>
-        <div className="flex flex-col items-center">
-          <a 
-            href="https://abi.ninja/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="px-8 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors inline-block mb-4"
-          >
-            Try It Now
-          </a>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Powered by <a href="https://abi.ninja/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">ABI Ninja</a> - Interact with smart contracts on any EVM chain
+      {/* Visual Connection */}
+      <div className="flex justify-center py-6">
+        <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
+      </div>
+
+      {/* Documentation Section */}
+      <section id="documentation" className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center mb-10">Developer Documentation</h2>
+        
+        <div className="max-w-4xl mx-auto mb-10">
+          <h3 className="text-2xl font-semibold mb-4">Getting Started with TeeAPI</h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-8">
+            TeeAPI makes it easy to securely connect your smart contracts with any external API. Follow these examples to integrate TeeAPI into your projects.
           </p>
+
+          {/* Tabs */}
+          <div className="mb-8">
+            <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
+              <button 
+                className={`px-6 py-2 ${activeTab === 'flight' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-500 dark:text-gray-400'} font-medium`}
+                onClick={() => setActiveTab('flight')}
+              >
+                Flight Delay Insurance
+              </button>
+              <button 
+                className={`px-6 py-2 ${activeTab === 'bank' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-500 dark:text-gray-400'} font-medium`}
+                onClick={() => setActiveTab('bank')}
+              >
+                Bank Balance Verification
+              </button>
+            </div>
+          </div>
+
+          {/* Flight Delay Example */}
+          <div className={activeTab === 'flight' ? 'block' : 'hidden'}>
+            <h4 className="text-xl font-semibold mb-4">Example 1: Flight Delay Insurance</h4>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              Create a smart contract that automatically pays out insurance claims when a flight is delayed.
+            </p>
+
+            <div className="mb-6">
+              <h5 className="font-semibold mb-2">Step 1: Initialize TeeAPI in your contract</h5>
+              <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
+                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="comment">// SPDX-License-Identifier: MIT</span>
+<span class="keyword">pragma solidity</span> ^0.8.0;
+
+<span class="keyword">import</span> <span class="string">"@teeapi/contracts/TeeApiConsumer.sol"</span>;
+
+<span class="keyword">contract</span> <span class="class-name">FlightDelayInsurance</span> <span class="keyword">is</span> <span class="class-name">TeeApiConsumer</span> {
+    <span class="comment">// Policy details struct</span>
+    <span class="keyword">struct</span> <span class="class-name">Policy</span> {
+        <span class="keyword">address</span> policyholder;
+        <span class="keyword">string</span> flightNumber;
+        <span class="keyword">uint256</span> departureDate;
+        <span class="keyword">uint256</span> premium;
+        <span class="keyword">uint256</span> payoutAmount;
+        <span class="keyword">bool</span> claimed;
+    }
+    
+    <span class="keyword">mapping</span>(<span class="keyword">uint256</span> => <span class="class-name">Policy</span>) <span class="keyword">public</span> policies;
+    <span class="keyword">uint256</span> <span class="keyword">public</span> nextPolicyId;
+    
+    <span class="function">constructor</span>(<span class="keyword">address</span> _teeApiAddress) <span class="class-name">TeeApiConsumer</span>(_teeApiAddress) {
+        <span class="comment">// Initialize contract with TeeAPI Oracle address</span>
+    }
+}` }} />
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h5 className="font-semibold mb-2">Step 2: Create the insurance policy purchase function</h5>
+              <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
+                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="function">function</span> <span class="function">purchasePolicy</span>(<span class="keyword">string</span> <span class="keyword">memory</span> _flightNumber, <span class="keyword">uint256</span> _departureDate) 
+    <span class="keyword">external</span> <span class="keyword">payable</span> {
+    <span class="function">require</span>(msg.value > 0, <span class="string">"Premium must be greater than 0"</span>);
+    
+    <span class="keyword">uint256</span> policyId = nextPolicyId++;
+    <span class="keyword">uint256</span> payoutAmount = msg.value * 3; <span class="comment">// 3x payout for simplicity</span>
+    
+    policies[policyId] = <span class="class-name">Policy</span>({
+        policyholder: msg.sender,
+        flightNumber: _flightNumber,
+        departureDate: _departureDate,
+        premium: msg.value,
+        payoutAmount: payoutAmount,
+        claimed: <span class="keyword">false</span>
+    });
+    
+    <span class="keyword">emit</span> <span class="function">PolicyPurchased</span>(policyId, msg.sender, _flightNumber);
+}` }} />
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h5 className="font-semibold mb-2">Step 3: Create claim function using TeeAPI</h5>
+              <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
+                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="function">function</span> <span class="function">checkFlightDelay</span>(<span class="keyword">uint256</span> _policyId) <span class="keyword">external</span> {
+    <span class="class-name">Policy</span> <span class="keyword">storage</span> policy = policies[_policyId];
+    <span class="function">require</span>(policy.policyholder != <span class="keyword">address</span>(0), <span class="string">"Policy does not exist"</span>);
+    <span class="function">require</span>(!policy.claimed, <span class="string">"Policy already claimed"</span>);
+    
+    <span class="comment">// Define API request</span>
+    <span class="keyword">bytes</span> <span class="keyword">memory</span> encodedRequest = <span class="function">abi.encode</span>(
+        <span class="string">"https://api.flightdata.com/status"</span>, <span class="comment">// API endpoint</span>
+        <span class="keyword">string</span>(<span class="function">abi.encodePacked</span>(<span class="string">"flight="</span>, policy.flightNumber, <span class="string">"&date="</span>, <span class="function">uint2str</span>(policy.departureDate))),
+        <span class="string">""</span>, <span class="comment">// No headers needed for this example</span>
+        <span class="string">"$.flight.delay"</span> <span class="comment">// JSON path to extract the delay time in minutes</span>
+    );
+    
+    <span class="comment">// Request API data through TeeAPI</span>
+    <span class="function">requestTeeApi</span>(encodedRequest, <span class="keyword">this</span>.processFlightDelay.<span class="property">selector</span>, <span class="function">abi.encode</span>(_policyId));
+}` }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Bank Balance Example */}
+          <div className={activeTab === 'bank' ? 'block' : 'hidden'}>
+            <h4 className="text-xl font-semibold mb-4">Example 2: Bank Balance Verification</h4>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              Verify bank account balances for DeFi loans without exposing sensitive data.
+            </p>
+
+            <div className="mb-6">
+              <h5 className="font-semibold mb-2">Step 1: Initialize TeeAPI in your contract</h5>
+              <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
+                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="comment">// SPDX-License-Identifier: MIT</span>
+<span class="keyword">pragma solidity</span> ^0.8.0;
+
+<span class="keyword">import</span> <span class="string">"@teeapi/contracts/TeeApiConsumer.sol"</span>;
+
+<span class="keyword">contract</span> <span class="class-name">BankBalanceVerification</span> <span class="keyword">is</span> <span class="class-name">TeeApiConsumer</span> {
+    <span class="comment">// Loan details struct</span>
+    <span class="keyword">struct</span> <span class="class-name">Loan</span> {
+        <span class="keyword">address</span> borrower;
+        <span class="keyword">uint256</span> loanAmount;
+        <span class="keyword">uint256</span> interestRate;
+        <span class="keyword">uint256</span> repaymentDate;
+        <span class="keyword">bool</span> approved;
+    }
+    
+    <span class="keyword">mapping</span>(<span class="keyword">uint256</span> => <span class="class-name">Loan</span>) <span class="keyword">public</span> loans;
+    <span class="keyword">uint256</span> <span class="keyword">public</span> nextLoanId;
+    
+    <span class="function">constructor</span>(<span class="keyword">address</span> _teeApiAddress) <span class="class-name">TeeApiConsumer</span>(_teeApiAddress) {
+        <span class="comment">// Initialize contract with TeeAPI Oracle address</span>
+    }
+}` }} />
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h5 className="font-semibold mb-2">Step 2: Create the loan application function</h5>
+              <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
+                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="function">function</span> <span class="function">applyForLoan</span>(<span class="keyword">uint256</span> _loanAmount, <span class="keyword">uint256</span> _interestRate, <span class="keyword">uint256</span> _repaymentDate) <span class="keyword">external</span> {
+    <span class="function">require</span>(_loanAmount > 0, <span class="string">"Loan amount must be greater than 0"</span>);
+    <span class="function">require</span>(_interestRate > 0, <span class="string">"Interest rate must be greater than 0"</span>);
+    <span class="function">require</span>(_repaymentDate > block.timestamp, <span class="string">"Repayment date must be in the future"</span>);
+    
+    <span class="keyword">uint256</span> loanId = nextLoanId++;
+    
+    loans[loanId] = <span class="class-name">Loan</span>({
+        borrower: msg.sender,
+        loanAmount: _loanAmount,
+        interestRate: _interestRate,
+        repaymentDate: _repaymentDate,
+        approved: <span class="keyword">false</span>
+    });
+    
+    <span class="keyword">emit</span> <span class="function">LoanApplied</span>(loanId, msg.sender, _loanAmount);
+}` }} />
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h5 className="font-semibold mb-2">Step 3: Create loan approval function using TeeAPI</h5>
+              <div className="bg-gray-800 rounded-lg p-4 overflow-auto">
+                <pre className="text-sm font-mono" dangerouslySetInnerHTML={{ __html: `<span class="function">function</span> <span class="function">checkBankBalance</span>(<span class="keyword">uint256</span> _loanId) <span class="keyword">external</span> {
+    <span class="class-name">Loan</span> <span class="keyword">storage</span> loan = loans[_loanId];
+    <span class="function">require</span>(loan.borrower != <span class="keyword">address</span>(0), <span class="string">"Loan does not exist"</span>);
+    <span class="function">require</span>(!loan.approved, <span class="string">"Loan already approved"</span>);
+    
+    <span class="comment">// Define API request</span>
+    <span class="keyword">bytes</span> <span class="keyword">memory</span> encodedRequest = <span class="function">abi.encode</span>(
+        <span class="string">"https://api.bankdata.com/balance"</span>, <span class="comment">// API endpoint</span>
+        <span class="keyword">string</span>(<span class="function">abi.encodePacked</span>(<span class="string">"account="</span>, loan.borrower)),
+        <span class="string">""</span>, <span class="comment">// No headers needed for this example</span>
+        <span class="string">"$.balance"</span> <span class="comment">// JSON path to extract the balance</span>
+    );
+    
+    <span class="comment">// Request API data through TeeAPI</span>
+    <span class="function">requestTeeApi</span>(encodedRequest, <span class="keyword">this</span>.processBankBalance.<span class="property">selector</span>, <span class="function">abi.encode</span>(_loanId));
+}` }} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-gray-800 p-6 rounded-lg border border-blue-100 dark:border-gray-700 mt-12">
+          <h4 className="text-lg font-semibold mb-2">Ready to Try TeeAPI?</h4>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
+            Interact with TeeAPI smart contracts on any EVM chain and see the power of secure API integration firsthand.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a href="https://abi.ninja/" target="_blank" rel="noopener noreferrer" className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Try It Now
+            </a>
+            <p className="text-sm text-gray-500 dark:text-gray-400 self-center">
+              Powered by <a href="https://abi.ninja/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">ABI Ninja</a> - Interact with smart contracts on any EVM chain
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-100 dark:bg-gray-800 py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <Image 
-                src="/teeapi-logo.svg" 
-                alt="TeeAPI Logo" 
-                width={100} 
-                height={25} 
-                className="mb-2"
-              />
-              <p className="text-gray-600 dark:text-gray-300 mt-2">Secure API Bridge for Blockchain</p>
-            </div>
-            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
-              <a href="#features" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Features</a>
-              <a href="#use-cases" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Use Cases</a>
-              <a href="#why" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Why TEE</a>
-              <a href="#how-it-works" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">How It Works</a>
-              <a href="#contact" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors">Try It Now</a>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-center text-gray-600 dark:text-gray-300">© {new Date().getFullYear()} TeeAPI. All rights reserved.</p>
-          </div>
-        </div>
+      <footer className="container mx-auto px-4 py-10 flex flex-col items-center text-center">
+        <Image 
+          src="/teeapi-logo.svg" 
+          alt="TeeAPI - Secure Blockchain API Bridge" 
+          width={120} 
+          height={30} 
+          priority
+        />
+        <p className="text-gray-600 dark:text-gray-300 mt-4">
+          The Secure Bridge Between Blockchain and APIs
+        </p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+          &copy; {new Date().getFullYear()} TeeAPI. All rights reserved.
+        </p>
       </footer>
     </div>
   );
